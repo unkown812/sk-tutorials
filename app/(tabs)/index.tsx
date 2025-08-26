@@ -1,10 +1,9 @@
 import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { UserProvider, useUser } from '../../context/UserContext';
-import { DatabaseProvider } from '../..//context/DatabaseContext';
+import { DatabaseProvider } from '../../context/DatabaseContext';
 import LoginScreen from '../LoginScreen';
 import MainTabNavigator from '../../navigation/MainTabNavigator';
 import { theme } from '../../theme/theme';
@@ -33,7 +32,6 @@ export default function App() {
       <UserProvider>
         <PaperProvider theme={theme}>
           <AppContent />
-          <StatusBar style="light" />
         </PaperProvider>
       </UserProvider>
     </DatabaseProvider>

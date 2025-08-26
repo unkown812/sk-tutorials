@@ -2,7 +2,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   DarkTheme,
   DefaultTheme,
-  DrawerRouter,
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -11,7 +10,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
 import { useColorScheme } from "@/components/useColorScheme";
 
 export {
@@ -43,7 +41,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
   return <RootLayoutNav />;
 }
 
@@ -89,16 +86,6 @@ function RootLayoutNav() {
               title: 'Settings',
             }}
           />
-          {/*
-          <Drawer.Screen
-            name="Login" // This is the name of the page and must match the url from root
-            options={{
-              drawerLabel: '',
-              title: 'Login',
-              
-            }}
-          />
-          */}
         </Drawer>
       </GestureHandlerRootView>
     </ThemeProvider>
