@@ -3,12 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { UserProvider } from './src/context/UserContext';
-import { DatabaseProvider } from './src/context/DatabaseContext';
-import LoginScreen from './src/screens/LoginScreen';
-import MainTabNavigator from './src/navigation/MainTabNavigator';
-import { useUser } from './src/context/UserContext';
-import { theme } from './src/theme/theme';
+import { UserProvider, useUser } from '../../context/UserContext';
+import { DatabaseProvider } from '../..//context/DatabaseContext';
+import LoginScreen from '../LoginScreen';
+import MainTabNavigator from '../../navigation/MainTabNavigator';
+import { theme } from '../../theme/theme';
 
 const Stack = createStackNavigator();
 
