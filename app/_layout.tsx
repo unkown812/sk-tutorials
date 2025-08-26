@@ -52,38 +52,47 @@ function RootLayoutNav() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer>
           <Drawer.Screen
-            name="(tabs)/index"
+            name="DashboardScreen"
             options={{
-              drawerLabel: 'Home',
-              title: 'Overview',
+              drawerLabel: 'DashBoard',
+              title: 'DashBoard',
+
             }}
           />
           <Drawer.Screen
-            name="Performance" 
+            name="StudentsScreen"
+            options={{
+              drawerLabel: 'Students',
+              title: 'StudentsScreen',
+
+            }}
+          />
+          <Drawer.Screen
+            name="PerformanceScreen"
             options={{
               drawerLabel: 'Performance',
-              title: 'Performance',
+
             }}
           />
           <Drawer.Screen
-            name="Fees"
+            name="FeesScreen"
             options={{
               drawerLabel: 'Fees',
               title: 'Fees',
             }}
           />
           <Drawer.Screen
-            name="Attendance" 
+            name="AttendanceScreen" 
             options={{
               drawerLabel: 'Attendance',
-              title: 'Attendance',
+              title: 'PerformanceScreen',
             }}
           />
           <Drawer.Screen
-            name="Settings" 
+            name="SettingsScreen" 
             options={{
               drawerLabel: 'Settings',
-              title: 'Settings',
+              title: 'PerformanceScreen',
             }}
           />
         </Drawer>

@@ -12,7 +12,6 @@ import {
   Text,
   Surface,
 } from 'react-native-paper';
-import { MaterialIcons } from '@expo/vector-icons';
 import { studentService } from '../services/studentService';
 import supabase from '../lib/supabase';
 import { colors } from '../theme/theme';
@@ -20,18 +19,14 @@ import { colors } from '../theme/theme';
 interface StatCardProps {
   title: string;
   value: string | number;
-  icon: keyof typeof MaterialIcons.glyphMap;
   color: string;
   backgroundColor: string;
 }
 
-function StatCard({ title, value, icon, color, backgroundColor }: StatCardProps) {
+function StatCard({ title, value,  color, backgroundColor }: StatCardProps) {
   return (
     <Surface style={[styles.statCard, { backgroundColor }]} elevation={2}>
       <View style={styles.statCardContent}>
-        <View style={[styles.iconContainer, { backgroundColor: color + '20' }]}>
-          <MaterialIcons name={icon} size={32} color={color} />
-        </View>
         <View style={styles.statTextContainer}>
           <Text style={styles.statTitle}>{title}</Text>
           <Text style={[styles.statValue, { color }]}>{value}</Text>
@@ -102,14 +97,16 @@ export default function DashboardScreen() {
         <StatCard
           title="Total Students"
           value={totalStudents}
-          icon="people"
           color={colors.primary}
           backgroundColor={colors.gray[50]}
         />
         <StatCard
           title="Fee Collection"
-          value={`₹${totalFeesCollected.toLocaleString()}`}
-          icon="payment"
+          value={new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0, 
+          }).format(totalFeesCollected)}
           color={colors.success}
           backgroundColor={colors.gray[50]}
         />
@@ -144,7 +141,7 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.gray[200],
   },
   header: {
     padding: 20,
@@ -164,6 +161,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 20,
     gap: 12,
+    backgroundColor:""
   },
   statCard: {
     flex: 1,
