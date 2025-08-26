@@ -16,7 +16,7 @@ import {
   Chip,
   Surface,
 } from 'react-native-paper';
-import { MaterialIcons } from '@expo/vector-icons';
+
 import { studentService } from '../services/studentService';
 import { colors } from '../theme/theme';
 
@@ -121,21 +121,44 @@ export default function StudentsScreen() {
         <View style={styles.feeInfo}>
           <Surface style={styles.feeItem} elevation={1}>
             <Text style={styles.feeLabel}>Total Fee</Text>
-            <Text style={styles.feeValue}>₹{item.total_fee?.toLocaleString() || 0}</Text>
+            <Text style={styles.feeValue}>
+              {item.total_fee
+                ? new Intl.NumberFormat('en-IN', {
+                  style: 'currency',
+                  currency: 'INR',
+                  maximumFractionDigits: 0,
+                }).format(item.total_fee)
+                : '₹0'}
+            </Text>
           </Surface>
+
           <Surface style={styles.feeItem} elevation={1}>
             <Text style={styles.feeLabel}>Paid</Text>
             <Text style={[styles.feeValue, { color: colors.success }]}>
-              ₹{item.paid_fee?.toLocaleString() || 0}
+              {item.paid_fee
+                ? new Intl.NumberFormat('en-IN', {
+                  style: 'currency',
+                  currency: 'INR',
+                  maximumFractionDigits: 0,
+                }).format(item.paid_fee)
+                : '₹0'}
             </Text>
           </Surface>
+
           <Surface style={styles.feeItem} elevation={1}>
             <Text style={styles.feeLabel}>Due</Text>
             <Text style={[styles.feeValue, { color: colors.error }]}>
-              ₹{item.due_amount?.toLocaleString() || 0}
+              {item.due_amount
+                ? new Intl.NumberFormat('en-IN', {
+                  style: 'currency',
+                  currency: 'INR',
+                  maximumFractionDigits: 0,
+                }).format(item.due_amount)
+                : '₹0'}
             </Text>
           </Surface>
         </View>
+
       </Card.Content>
     </Card>
   );
@@ -176,14 +199,39 @@ export default function StudentsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.gray[200],
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: colors.gray[300],
+    borderRadius: 12,
+    overflow: 'hidden',
   },
   header: {
     padding: 16,
     paddingBottom: 8,
   },
   searchbar: {
-    elevation: 2,
+    elevation: 5,
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 1,
+    backgroundColor: colors.gray[200],
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    // borderColor: colors.gray[300],
+    borderRadius: 40,
   },
   listContainer: {
     padding: 16,
@@ -244,6 +292,6 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.primaryLight,
   },
 });

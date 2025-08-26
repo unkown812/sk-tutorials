@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from "@/components/useColorScheme";
+import { Image } from "react-native";
 
 export {
   ErrorBoundary,
@@ -51,6 +52,7 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer>
+          <Image source={require('../assets/images/icon.png')}/>
           <Drawer.Screen
             name="DashboardScreen"
             options={{
