@@ -22,7 +22,6 @@ export const unstable_settings = {
   initialRouteName: "(tabs)",
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -31,7 +30,6 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -57,35 +55,35 @@ function RootLayoutNav() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer>
           <Drawer.Screen
-            name="(tabs)/index" // This is the name of the page and must match the url from root
+            name="(tabs)/index"
             options={{
               drawerLabel: 'Home',
               title: 'Overview',
             }}
           />
           <Drawer.Screen
-            name="Performance" // This is the name of the page and must match the url from root
+            name="Performance" 
             options={{
               drawerLabel: 'Performance',
               title: 'Performance',
             }}
           />
           <Drawer.Screen
-            name="Fees" // This is the name of the page and must match the url from root
+            name="Fees"
             options={{
               drawerLabel: 'Fees',
               title: 'Fees',
             }}
           />
           <Drawer.Screen
-            name="Attendance" // This is the name of the page and must match the url from root
+            name="Attendance" 
             options={{
               drawerLabel: 'Attendance',
               title: 'Attendance',
             }}
           />
           <Drawer.Screen
-            name="Settings" // This is the name of the page and must match the url from root
+            name="Settings" 
             options={{
               drawerLabel: 'Settings',
               title: 'Settings',
