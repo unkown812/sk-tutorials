@@ -57,10 +57,17 @@ function RootLayoutNav() {
                 <View style={styles.drawerHeader}>
                   <FontAwesome
                     name="bars"
-                    size={24}
+                    size={30}
                     onPress={() => navigation.toggleDrawer()}
                   />
-                  <View style={{ alignItems: 'center', flex: 1 ,flexDirection:"row",justifyContent:"center"}}>
+                  <View
+                    style={{
+                      alignItems: "center",
+                      flex: 1,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Image
                       source={require("../assets/images/logo.png")}
                       style={styles.drawerIcon}
@@ -114,6 +121,18 @@ function RootLayoutNav() {
                 title: "Settings",
               }}
             />
+            <Drawer.Screen
+              name="LoginScreen"
+              options={{
+                drawerItemStyle: { display: "none" },
+              }}
+            />
+            <Drawer.Screen
+              name="(tabs)/index"
+              options={{
+                drawerItemStyle: { display: "none" },
+              }}
+            />
           </Drawer>
         </PaperProvider>
       </GestureHandlerRootView>
@@ -127,7 +146,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
     alignItems: "center",
-    // justifyContent: "center",
+    justifyContent: "center",
     flexDirection: "row",
   },
   drawerIcon: {
