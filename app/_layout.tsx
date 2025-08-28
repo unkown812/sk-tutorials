@@ -9,14 +9,12 @@ import { Drawer } from "expo-router/drawer";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Image, Text, View, StyleSheet } from "react-native";
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from "react-native-paper";
 
-export {
-  ErrorBoundary,
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -46,7 +44,6 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
-
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
@@ -54,64 +51,64 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <PaperProvider>
-          <Drawer>
-          {/* screenOptions={{
-            header: () => (
-              <View style={styles.drawerHeader}>
-                <Image 
-                  source={require('../assets/images/logo.png')}
-                  style={styles.drawerIcon}
-                  resizeMode="contain"
-                />
-                <Text style={styles.drawerTitle}>SK Tutorials</Text>
-              </View>
-            ),
-          }}
-        > */}
-          <Drawer.Screen
-            name="DashboardScreen"
-            options={{
-              drawerLabel: 'DashBoard',
-              title: 'DashBoard',
+          <Drawer
+            screenOptions={{
+              header: () => (
+                <View style={styles.drawerHeader}>
+                  <Image
+                    source={require("../assets/images/logo.png")}
+                    style={styles.drawerIcon}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.drawerTitle}>SK Tutorials</Text>
+                </View>
+              ),
             }}
-          />
-          <Drawer.Screen
-            name="StudentsScreen"
-            options={{
-              drawerLabel: 'Students',
-              title: 'Students',
-            }}
-          />
+          >
+            <Drawer.Screen
+              name="DashboardScreen"
+              options={{
+                drawerLabel: "DashBoard",
+                title: "DashBoard",
+              }}
+            />
+            <Drawer.Screen
+              name="StudentsScreen"
+              options={{
+                drawerLabel: "Students",
+                title: "Students",
+              }}
+            />
             <Drawer.Screen
               name="FeesScreen"
               options={{
-                drawerLabel: 'Fees',
-                title: 'Fees',
+                drawerLabel: "Fees",
+                title: "Fees",
               }}
             />
-          <Drawer.Screen
-            name="PerformanceScreen"
-            options={{
-              drawerLabel: 'Performance',
-              title: 'Performance',
-            }}
-          />
-          <Drawer.Screen
-            name="AttendanceScreen" 
-            options={{
-              drawerLabel: 'Attendance',
-              title: 'Attendance',
-            }}
-          />
-          <Drawer.Screen
-            name="SettingsScreen" 
-            options={{
-              drawerLabel: 'Settings',
-              title: 'Settings',
-            }}
-          />
-        </Drawer>
-      </PaperProvider>
+            <Drawer.Screen
+              name="PerformanceScreen"
+              options={{
+                drawerLabel: "Performance",
+                title: "Performance",
+              }}
+            />
+            <Drawer.Screen
+              name="AttendanceScreen"
+              options={{
+                drawerLabel: "Attendance",
+                title: "Attendance",
+              }}
+            />
+            <Drawer.Screen
+              name="SettingsScreen"
+              options={{
+                drawerLabel: "Settings",
+                title: "Settings",
+              }}
+            />
+          </Drawer>
+        </PaperProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
   );
@@ -121,9 +118,9 @@ const styles = StyleSheet.create({
   drawerHeader: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderBottomColor: "#ccc",
+    alignItems: "center",
+    justifyContent: "center",
   },
   drawerIcon: {
     width: 64,
@@ -132,6 +129,6 @@ const styles = StyleSheet.create({
   },
   drawerTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
