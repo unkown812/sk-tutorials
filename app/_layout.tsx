@@ -12,6 +12,7 @@ import "react-native-reanimated";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from "@/components/useColorScheme";
 import { Image, Text, View, StyleSheet } from "react-native";
+import { Provider as PaperProvider } from 'react-native-paper';
 
 export {
   ErrorBoundary,
@@ -52,7 +53,8 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Drawer>
+        <PaperProvider>
+          <Drawer>
           {/* screenOptions={{
             header: () => (
               <View style={styles.drawerHeader}>
@@ -109,6 +111,7 @@ function RootLayoutNav() {
             }}
           />
         </Drawer>
+      </PaperProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
   );

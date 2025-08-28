@@ -51,6 +51,18 @@ export default function StudentsScreen() {
   const [editStudent, setEditStudent] = useState<Student | null>(null);
   const [adding, setAdding] = useState(false);
   const [addError, setAddError] = useState<string | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [newStudent, setNewStudent] = useState<Omit<Student, 'id' | 'due_amount'> & { id?: string, due_amount?: number }>({
+    name: '',
+    email: '',
+    phone: '',
+    category: '',
+    course: '',
+    year: 0,
+    fee_status: 'Unpaid',
+    total_fee: 0,
+    paid_fee: 0,
+  });
 
   const fetchStudents = async () => {
     try {
@@ -143,6 +155,40 @@ export default function StudentsScreen() {
     setEditStudent(student);
     setShowEditModal(true);
     setAddError(null);
+  };
+
+  const handleAddStudentSubmit = async () => {
+    setAdding(true);
+    setAddError(null);
+    try {
+      // Create a complete student object with all required fields
+      const studentToAdd = {
+        ...newStudent,
+        due_amount: (newStudent.total_fee || 0) - (newStudent.paid_fee || 0),
+      };
+
+      await studentService.create(studentToAdd as any);
+      setShowAddModal(false);
+      setNewStudent({
+        name: '',
+        email: '',
+        phone: '',
+        category: '',
+        course: '',
+        year: 0,
+        fee_status: 'Unpaid',
+        total_fee: 0,
+        paid_fee: 0,
+      });
+      fetchStudents();
+      Alert.alert('Success', 'Student added successfully');
+    } catch (error) {
+      console.error('Error adding student:', error);
+      setAddError('Failed to add student');
+      Alert.alert('Error', 'Failed to add student');
+    } finally {
+      setAdding(false);
+    }
   };
 
   const renderStudent = ({ item }: { item: Student }) => (
@@ -238,9 +284,7 @@ export default function StudentsScreen() {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => {
-          Alert.alert('Add Student', 'Add student functionality coming soon!');
-        }}
+        onPress={() => setShowAddModal(true)}
       />
 
       <Portal>
@@ -366,6 +410,129 @@ export default function StudentsScreen() {
                 </View>
               </View>
             )}
+          </ScrollView>
+        </Modal>
+        
+        <Modal
+          visible={showAddModal}
+          onDismiss={() => setShowAddModal(false)}
+          contentContainerStyle={styles.modalContainer}
+        >
+          <ScrollView style={styles.modalScrollView}>
+            <View style={styles.modalHeader}>
+              <Title style={styles.modalTitle}>Add New Student</Title>
+              <Button
+                icon="close"
+                onPress={() => setShowAddModal(false)}
+                style={styles.closeButton}
+              >
+                Close
+              </Button>
+            </View>
+
+            {addError && (
+              <Text style={styles.errorText}>{addError}</Text>
+            )}
+
+            <View style={styles.modalContent}>
+              <Text style={styles.sectionTitle}>Basic Information</Text>
+              <TextInput
+                label="Name"
+                value={newStudent.name}
+                onChangeText={(text) => setNewStudent({ ...newStudent, name: text })}
+                style={styles.input}
+                mode="outlined"
+              />
+              <TextInput
+                label="Email"
+                value={newStudent.email}
+                onChangeText={(text) => setNewStudent({ ...newStudent, email: text })}
+                style={styles.input}
+                mode="outlined"
+                keyboardType="email-address"
+              />
+              <TextInput
+                label="Phone"
+                value={newStudent.phone}
+                onChangeText={(text) => setNewStudent({ ...newStudent, phone: text })}
+                style={styles.input}
+                mode="outlined"
+                keyboardType="phone-pad"
+              />
+
+              <Divider style={styles.divider} />
+
+              <Text style={styles.sectionTitle}>Academic Details</Text>
+              <TextInput
+                label="Category"
+                value={newStudent.category}
+                onChangeText={(text) => setNewStudent({ ...newStudent, category: text })}
+                style={styles.input}
+                mode="outlined"
+              />
+              <TextInput
+                label="Course"
+                value={newStudent.course}
+                onChangeText={(text) => setNewStudent({ ...newStudent, course: text })}
+                style={styles.input}
+                mode="outlined"
+              />
+              <TextInput
+                label="Year"
+                value={newStudent.year?.toString()}
+                onChangeText={(text) => setNewStudent({ ...newStudent, year: parseInt(text) || 0 })}
+                style={styles.input}
+                mode="outlined"
+                keyboardType="numeric"
+              />
+
+              <Divider style={styles.divider} />
+
+              <Text style={styles.sectionTitle}>Fee Information</Text>
+              <TextInput
+                label="Total Fee"
+                value={newStudent.total_fee?.toString()}
+                onChangeText={(text) => setNewStudent({ ...newStudent, total_fee: parseFloat(text) || 0 })}
+                style={styles.input}
+                mode="outlined"
+                keyboardType="numeric"
+              />
+              <TextInput
+                label="Fee Status"
+                value={newStudent.fee_status}
+                onChangeText={(text) => setNewStudent({ ...newStudent, fee_status: text })}
+                style={styles.input}
+                mode="outlined"
+              />
+              <TextInput
+                label="Paid Fee"
+                value={newStudent.paid_fee?.toString()}
+                onChangeText={(text) => setNewStudent({ ...newStudent, paid_fee: parseFloat(text) || 0 })}
+                style={styles.input}
+                mode="outlined"
+                keyboardType="numeric"
+              />
+
+              <View style={styles.modalActions}>
+                <Button
+                  mode="outlined"
+                  onPress={() => setShowAddModal(false)}
+                  style={styles.cancelButton}
+                  disabled={adding}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  mode="contained"
+                  onPress={handleAddStudentSubmit}
+                  style={styles.saveButton}
+                  loading={adding}
+                  disabled={adding}
+                >
+                  {adding ? 'Adding...' : 'Add Student'}
+                </Button>
+              </View>
+            </View>
           </ScrollView>
         </Modal>
       </Portal>
