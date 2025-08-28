@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from "@/components/useColorScheme";
-import { Image } from "react-native";
+import { Image, Text, View, StyleSheet } from "react-native";
 
 export {
   ErrorBoundary,
@@ -45,6 +45,7 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
@@ -52,49 +53,59 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer>
-          <Image source={require('../assets/images/icon.png')}/>
+          {/* screenOptions={{
+            header: () => (
+              <View style={styles.drawerHeader}>
+                <Image 
+                  source={require('../assets/images/logo.png')}
+                  style={styles.drawerIcon}
+                  resizeMode="contain"
+                />
+                <Text style={styles.drawerTitle}>SK Tutorials</Text>
+              </View>
+            ),
+          }}
+        > */}
           <Drawer.Screen
             name="DashboardScreen"
             options={{
               drawerLabel: 'DashBoard',
               title: 'DashBoard',
-
             }}
           />
           <Drawer.Screen
             name="StudentsScreen"
             options={{
               drawerLabel: 'Students',
-              title: 'StudentsScreen',
-
+              title: 'Students',
             }}
           />
+            <Drawer.Screen
+              name="FeesScreen"
+              options={{
+                drawerLabel: 'Fees',
+                title: 'Fees',
+              }}
+            />
           <Drawer.Screen
             name="PerformanceScreen"
             options={{
               drawerLabel: 'Performance',
-
-            }}
-          />
-          <Drawer.Screen
-            name="FeesScreen"
-            options={{
-              drawerLabel: 'Fees',
-              title: 'Fees',
+              title: 'Performance',
             }}
           />
           <Drawer.Screen
             name="AttendanceScreen" 
             options={{
               drawerLabel: 'Attendance',
-              title: 'PerformanceScreen',
+              title: 'Attendance',
             }}
           />
           <Drawer.Screen
             name="SettingsScreen" 
             options={{
               drawerLabel: 'Settings',
-              title: 'PerformanceScreen',
+              title: 'Settings',
             }}
           />
         </Drawer>
@@ -102,3 +113,22 @@ function RootLayoutNav() {
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  drawerHeader: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  drawerIcon: {
+    width: 64,
+    height: 64,
+    marginBottom: 10,
+  },
+  drawerTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});

@@ -8,23 +8,21 @@ import {
   Alert,
 } from 'react-native';
 import {
-  Text,
   TextInput,
   Button,
   Card,
   Title,
   Paragraph,
-  ActivityIndicator,
 } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useUser } from '../context/UserContext';
+import { useAuth } from '../hooks/useAuth';
 import { colors } from '../theme/theme';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useUser();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -101,7 +99,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.primaryLight,
   },
   scrollContainer: {
     flexGrow: 1,
