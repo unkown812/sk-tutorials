@@ -53,14 +53,21 @@ function RootLayoutNav() {
         <PaperProvider>
           <Drawer
             screenOptions={{
-              header: () => (
+              header: ({ navigation }) => (
                 <View style={styles.drawerHeader}>
-                  <Image
-                    source={require("../assets/images/logo.png")}
-                    style={styles.drawerIcon}
-                    resizeMode="contain"
+                  <FontAwesome
+                    name="bars"
+                    size={24}
+                    onPress={() => navigation.toggleDrawer()}
                   />
-                  <Text style={styles.drawerTitle}>SK Tutorials</Text>
+                  <View style={{ alignItems: 'center', flex: 1 ,flexDirection:"row",justifyContent:"center"}}>
+                    <Image
+                      source={require("../assets/images/logo.png")}
+                      style={styles.drawerIcon}
+                      resizeMode="contain"
+                    />
+                    <Text style={styles.drawerTitle}>SK Tutorials</Text>
+                  </View>
                 </View>
               ),
             }}
@@ -120,7 +127,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
+    flexDirection: "row",
   },
   drawerIcon: {
     width: 64,
